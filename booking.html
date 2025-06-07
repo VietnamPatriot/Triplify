@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html lang="vi">
-    <!-- SweetAlert2 CDN -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <head>
-    
   <meta charset="UTF-8">
   <title>Đặt Phòng & Dịch Vụ Khách Sạn</title>
   <style>
-    
     body {
       font-family: 'Segoe UI', sans-serif;
       background: #f3f8f3;
       padding: 30px;
     }
-    
     .container {
-
       max-width: 800px;
       margin: auto;
       background: white;
@@ -72,33 +66,16 @@
     }
   </style>
 </head>
-<script>
-    function handleBooking(event) {
-      event.preventDefault(); // Stop the form from submitting normally
-  
-      Swal.fire({
-        icon: 'success',
-        title: 'Booking Confirmed!',
-        text: 'Your room reservation has been successfully submitted.',
-        confirmButtonColor: '#4CAF50',
-        confirmButtonText: 'Awesome!'
-      });
-  
-      // Optionally clear the form
-      document.querySelector("form").reset();
-    }
-  </script>
- 
 <body>
 
-</script>
-
-        <!-- ... rest of your form ... -->
-      </div>
 <div class="container">
-  <h2>Book your room</h2>
+
+
+  <h2>Đặt Phòng & Dịch Vụ</h2>
+ 
   <form oninput="updateTotal()">
-    <label>Username:</label>
+  <form action="payment.html" method="get">
+    <label>Họ tên:</label>
     <input type="text" required>
 
     <label>Email:</label>
@@ -109,11 +86,6 @@
       <option value="Superior">Superior Room - $249</option>
       <option value="Large">Large Room - $199</option>
       <option value="Medium">Medium Room - $159</option>
-      <div class="container" id="bookingForm">
-        <button class="close-btn" onclick="closeForm()">×</button>
-        <h2>Book your room</h2>
-        <!-- ... rest of your form ... -->
-      </div>
     </select>
 
     <div class="inline-group">
@@ -143,113 +115,98 @@
     <label>Vật dụng đã dùng:</label>
     <div class="inline-group">
       <div>
-        <label>Bottled Water ($2/chai):</label>
+        <label>Nước suối ($2/chai):</label>
         <input type="number" id="water" value="0" min="0">
       </div>
       <div>
         <label>Bia / Rượu ($5/chai):</label>
         <input type="number" id="alcohol" value="0" min="0">
+      </div>
     </div>
-</div>
-<div class="inline-group">
-  <div>
-    <label>Extra towel ($3/cái):</label>
-    <input type="number" id="towel" value="0" min="0">
-  </div>
-  <div>
-    <label>souvenir ($20/món):</label>
-    <input type="number" id="souvenir" value="0" min="0">
-  </div>
-</div>
+    <div class="inline-group">
+      <div>
+        <label>Khăn thêm ($3/cái):</label>
+        <input type="number" id="towel" value="0" min="0">
+      </div>
+      <div>
+        <label>Đồ lưu niệm ($20/món):</label>
+        <input type="number" id="souvenir" value="0" min="0">
+      </div>
+    </div>
 
-<div class="summary">
-  <p>🛏️ <strong>Số đêm ở:</strong> <span id="nights">0</span></p>
-  <p>💰 Giá phòng: $<span id="price">0</span></p>
-  <p>➕ Dịch vụ: $<span id="services">0</span></p>
-  <p>➕ Vật dụng: $<span id="items">0</span></p>
-  <p>➕ Phí dịch vụ (5%): $<span id="service">0</span></p>
-  <p>➕ Thuế VAT (10%): $<span id="tax">0</span></p>
-  <p>➖ Giảm giá: -$<span id="discount">0</span></p>
-  <hr>
-  <p>🧾 <strong>Tổng cộng:</strong> $<span id="total">0</span></p>
-</div>
-<form onsubmit="handleBooking(event)"></form>
-<button type="submit">Book Your Room</button>
-</form>
+    <div class="summary">
+      <p>🛏️ <strong>Số đêm ở:</strong> <span id="nights">0</span></p>
+      <p>💰 Giá phòng: $<span id="price">0</span></p>
+      <p>➕ Dịch vụ: $<span id="services">0</span></p>
+      <p>➕ Vật dụng: $<span id="items">0</span></p>
+      <p>➕ Phí dịch vụ (5%): $<span id="service">0</span></p>
+      <p>➕ Thuế VAT (10%): $<span id="tax">0</span></p>
+      <p>➖ Giảm giá: -$<span id="discount">0</span></p>
+      <hr>
+      <p>🧾 <strong>Tổng cộng:</strong> $<span id="total">0</span></p>
+    </div>
+
+    <button type="submit">Xác Nhận Thanh Toán</button>
+  </form>
+  </form>
 </div>
 
 <script>
-const roomPrices = {
-"Superior": 249,
-"Large": 199,
-"Medium": 159
-};
+  const roomPrices = {
+    "Superior": 249,
+    "Large": 199,
+    "Medium": 159
+  };
 
-function updateTotal() {
-const room = document.getElementById("room").value;
-const guests = parseInt(document.getElementById("guests").value) || 1;
+  function updateTotal() {
+    const room = document.getElementById("room").value;
+    const guests = parseInt(document.getElementById("guests").value) || 1;
 
-const basePrice = roomPrices[room] || 0;
+    const basePrice = roomPrices[room] || 0;
 
-const checkin = new Date(document.getElementById("checkin").value);
-const checkout = new Date(document.getElementById("checkout").value);
-const diffTime = checkout - checkin;
-const nights = Math.max(Math.ceil(diffTime / (1000 * 60 * 60 * 24)), 0);
+    const checkin = new Date(document.getElementById("checkin").value);
+    const checkout = new Date(document.getElementById("checkout").value);
+    const diffTime = checkout - checkin;
+    const nights = Math.max(Math.ceil(diffTime / (1000 * 60 * 60 * 24)), 0);
 
-const roomTotal = basePrice * nights;
+    const roomTotal = basePrice * nights;
 
-// Services
-let services = 0;
-if (document.getElementById("car").checked) services += 35;
-if (document.getElementById("food").checked) services += 50 * guests;
-if (document.getElementById("spa").checked) services += 60 * guests;
+    // Services
+    let services = 0;
+    if (document.getElementById("car").checked) services += 35;
+    if (document.getElementById("food").checked) services += 50 * guests;
+    if (document.getElementById("spa").checked) services += 60 * guests;
 
-// Items
-const water = parseInt(document.getElementById("water").value) || 0;
-const alcohol = parseInt(document.getElementById("alcohol").value) || 0;
-const towel = parseInt(document.getElementById("towel").value) || 0;
-const souvenir = parseInt(document.getElementById("souvenir").value) || 0;
+    // Items
+    const water = parseInt(document.getElementById("water").value) || 0;
+    const alcohol = parseInt(document.getElementById("alcohol").value) || 0;
+    const towel = parseInt(document.getElementById("towel").value) || 0;
+    const souvenir = parseInt(document.getElementById("souvenir").value) || 0;
 
-const items = (water * 2) + (alcohol * 5) + (towel * 3) + (souvenir * 20);
+    const items = (water * 2) + (alcohol * 5) + (towel * 3) + (souvenir * 20);
 
-// Discount
-let discount = 0;
-const voucher = document.getElementById("voucher").value.trim().toUpperCase();
-if (voucher === "VIP25") discount = 25;
-if (voucher === "SUMMER10") discount = 10;
+    // Discount
+    let discount = 0;
+    const voucher = document.getElementById("voucher").value.trim().toUpperCase();
+    if (voucher === "VIP25") discount = 25;
+    if (voucher === "SUMMER10") discount = 10;
 
-const subtotal = roomTotal + services + items;
-const serviceFee = subtotal * 0.05;
-const tax = subtotal * 0.10;
-const total = subtotal + serviceFee + tax - discount;
+    const subtotal = roomTotal + services + items;
+    const serviceFee = subtotal * 0.05;
+    const tax = subtotal * 0.10;
+    const total = subtotal + serviceFee + tax - discount;
 
-// Update HTML
-document.getElementById("nights").innerText = nights;
-document.getElementById("price").innerText = roomTotal.toFixed(2);
-document.getElementById("services").innerText = services.toFixed(2);
-document.getElementById("items").innerText = items.toFixed(2);
-document.getElementById("service").innerText = serviceFee.toFixed(2);
-document.getElementById("tax").innerText = tax.toFixed(2);
+    // Update HTML
+    document.getElementById("nights").innerText = nights;
+    document.getElementById("price").innerText = roomTotal.toFixed(2);
+    document.getElementById("services").innerText = services.toFixed(2);
+    document.getElementById("items").innerText = items.toFixed(2);
+    document.getElementById("service").innerText = serviceFee.toFixed(2);
+    document.getElementById("tax").innerText = tax.toFixed(2);
     document.getElementById("discount").innerText = discount.toFixed(2);
     document.getElementById("total").innerText = total.toFixed(2);
   }
 </script>
-<script>
-  
-      event.preventDefault(); // Stop the form from submitting normally
-  
-      Swal.fire({
-        icon: 'success',
-        title: 'Booking Confirmed!',
-        text: 'Your room reservation has been successfully submitted.',
-        confirmButtonColor: '#4CAF50',
-        confirmButtonText: 'Awesome!'
-      });
-  
-        // Optionally, you can log the booking details to the consolee
-      // Optionally clear the form
-      document.querySelector("form").reset();
-    
-  </script>
+
 </body>
 </html>

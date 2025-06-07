@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+      .comment-form {
+        display: none;
+        margin-top: 10px;
+        padding: 10px;
+        background: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+    
+      .comment-form textarea {
+        width: 100%;
+        resize: vertical;
+      }
+    
+      .comment-form button {
+        margin-top: 5px;
+        padding: 5px 10px;
+      }
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Triplify</title>
@@ -49,6 +71,23 @@
       top: 0,
       behavior: 'smooth'
     });
+  }
+</script>
+<script>
+  function toggleCommentForm(icon) {
+    const form = icon.nextElementSibling;
+    form.style.display = (form.style.display === 'block') ? 'none' : 'block';
+  }
+
+  function submitComment(button) {
+    const textarea = button.previousElementSibling;
+    const comment = textarea.value.trim();
+    if (comment !== "") {
+      alert("Comment submitted: " + comment);
+      textarea.value = "";
+    } else {
+      alert("Please write a comment before submitting.");
+    }
   }
 </script>
   <body>
@@ -815,9 +854,16 @@
                 <div class="admin flex">
                   <i class="fa fa-user"></i>
                   <label>Admin</label>
-                  <i class="fa fa-heart"></i>
-                  <label>421</label>
-                  <i class="fa fa-comments"></i>
+                  <i class="fa fa-heart" id="heart-icon" onclick="toggleLike()"></i>
+                  <label id="heart-count">421</label>
+                  <i class="fa fa-comments" onclick="toggleCommentForm(this)"></i>
+
+<!-- 👇 Comment form -->
+<div class="comment-form">
+  <textarea placeholder="Write your comment..." rows="3"></textarea>
+  <br>
+  <button onclick="submitComment(this)">Submit</button>
+</div>
                 </div>
                 <p>
                   The new bar is now open. Come and enjoy the best drink in the beach
@@ -833,9 +879,17 @@
                 <div class="admin flex">
                   <i class="fa fa-user"></i>
                   <label>Admin</label>
-                  <i class="fa fa-heart"></i>
-                  <label>116</label>
-                  <i class="fa fa-comments"></i>
+                  <i class="fa fa-heart" id="heart-icon-2" onclick="toggleLike2()"></i>
+                  <label id="heart-count-2">116</label>
+
+                  <i class="fa fa-comments" onclick="toggleCommentForm(this)"></i>
+
+<!-- 👇 Comment form -->
+<div class="comment-form">
+  <textarea placeholder="Write your comment..." rows="3"></textarea>
+  <br>
+  <button onclick="submitComment(this)">Submit</button>
+</div>
                 </div>
                 <p>
                   We have added new suporior rooms with the best view in the city
@@ -960,5 +1014,46 @@
       crossorigin="anonymous"
     ></script>
     <script src="./js/manage_account.js"></script>
+    <script>
+      let liked = false;
+      let count = 421;
+    
+      function toggleLike() {
+        liked = !liked;
+        const icon = document.getElementById("heart-icon");
+        const label = document.getElementById("heart-count");
+    
+        if (liked) {
+          icon.style.color = "red";
+          count++;
+        } else {
+          icon.style.color = "green"; // or your original color
+          count--;
+        }
+    
+        label.textContent = count;
+      }
+    </script>
+    <script>
+      let liked2 = false;
+      let count2 = 116;
+    
+      function toggleLike2() {
+        liked2 = !liked2;
+        const icon = document.getElementById("heart-icon-2");
+        const label = document.getElementById("heart-count-2");
+    
+        if (liked2) {
+          icon.style.color = "red";
+          count2++;
+        } else {
+          icon.style.color = "green";
+          count2--;
+        }
+    
+        label.textContent = count2;
+      }
+    </script>
+    
   </body>
 </html>
