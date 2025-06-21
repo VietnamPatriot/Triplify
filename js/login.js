@@ -1,67 +1,51 @@
-// lay thong tin nguoi dung nhap vao form => kiem tra thong tin
-function validateForm(email, password) {
-  // kiem tra rong
-  if (email == "" || password == "") {
-    alert("You need to fill all fields!");
-    return false;
+const loginForm = document.getElementById("loginForm");
+
+// -----------------------------------------------------
+// kiem tra trung lap
+function isEmailRegistered(email) {
+  // kiem tra xem email da ton tai trong local storage chua
+  if (localStorage.getItem(email) !== null) {
+    return true;
   }
-  // tao bien kiem tra cu phap
-  const email_regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  // kiem tra format email
-  if (email_regex.test(email) == false) {
-    alert("Email is bad format!");
-    return false;
-  }
-  // kiem tra format password
-  if (password.length < 6) {
-    alert("Password needs least 6 letters!");
-    return false;
-  }
-  return true; // du lieu chinh xac
+  return false;
 }
 
-// luu vao local storage => kiem tra trang thai co login chua
-function checkLoginAccount(defaultAccount) {
-  // lay du lieu tu form HTML (element)
-  // [HTML DOM]: mỗi tag trong html </> được gọi là element
-  // document: lấy toàn bộ code trong file HTML đã được liên kết (thông qua tag script)
-  // getElementById: lấy tag html thông qua thuộc tính id (vd: <input id="a"/>)
-  const email = document.getElementById("login-email").value.trim();
-  const password = document.getElementById("login-password").value.trim();
-
-  // kiem tra form
-  if (validateForm(email, password)) {
-    // so sanh du lieu nhap vao voi du lieu trong may co san
-    if (defaultAccount.email == email) {
-      // dung email -> so sanh password
-      if (defaultAccount.password == password) {
-        alert("Login successfully!");
-        // luu lại thông tin đăng nhập
-        localStorage.setItem("currentUser", email);
-        // chuyen sang index
-        location.href = "../index.html";
-        return; // kiem tra xong -> thoat ham -> khong lam gi them
-      } else {
-        // sai password
-        alert("Password is incorrect!");
-        return;
-      }
+// -----------------------------------------------------
+// dang nhap -> chuyen home
+function loginToHome() {
+  // lay du lieu tu form
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  // kiem tra email da dang ki chua
+  if (isEmailRegistered(email)) {
+    const userInfo = JSON.parse(localStorage.getItem(email));
+    // kiem tra password
+    const passwordStored = userInfo.password;
+    // so sanh password
+    if (passwordStored === password) {
+      // dang nhap thanh cong
+      // luu current user vao local storage
+      localStorage.setItem("currentUser", email);
+      alert("Login successful! Redirecting to home page...");
+      // chuyen trang
+      window.location.href = "../index.html"; // chuyen den trang home
     } else {
-      // sai email
-      alert("Email is not exist in database, please change to signup form!");
+      // mat khau khong dung
+      alert("Incorrect password. Please try again.");
       return;
     }
-  } else return; // sai du lieu nhap vao -> khong lam gi them
+  } else {
+    // email chua dang ki
+    alert("Email not registered. Please sign up first.");
+    return;
+  }
 }
 
-// bat su kien cho button login
+// -----------------------------------------------------
+// bat su kien cho nut dang nhap
 document
-  .getElementById("login-btn")
-  .addEventListener("click", function (event) {
-    // chan event mac dinh
-    event.preventDefault();
-    // lay lai du lieu tai khoan mac dinh trong local storage
-    // getItem: tra ve du lieu json -> su dung ham parse() chuyen thanh kieu du lieu js
-    const defaultAccount = JSON.parse(localStorage.getItem("defaultAccount"));
-    checkLoginAccount(defaultAccount);
+  .getElementById("loginForm")
+  .addEventListener("submit", function (event) {
+    event.preventDefault(); // ngan chan submit mac dinh (chuyen trang theo action/ sua url)
+    loginToHome(); // goi ham dang nhap
   });

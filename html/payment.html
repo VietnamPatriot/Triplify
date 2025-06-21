@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phương Thức Thanh Toán</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: #f5f5f5;
+        padding: 30px;
+      }
+      .container {
+        max-width: 500px;
+        background: white;
+        margin: auto;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+      label {
+        font-weight: bold;
+      }
+      select,
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+      button {
+        background-color: #10b981;
+        color: white;
+        padding: 12px;
+        width: 100%;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #059669;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Chọn Phương Thức Thanh Toán</h2>
+      <form id="paymentForm" onsubmit="confirmPayment(event)">
+        <label for="method">Phương thức:</label>
+        <select id="method" required>
+          <option value="">-- Chọn --</option>
+          <option value="credit">Thẻ Tín Dụng (Credit Card)</option>
+          <option value="paypal">PayPal</option>
+          <option value="visa">Visa</option>
+        </select>
+
+        <div id="cardDetails" style="display: none">
+          <label>Số thẻ:</label>
+          <input type="text" placeholder="XXXX XXXX XXXX XXXX" required />
+
+          <label>Ngày hết hạn:</label>
+          <input type="month" required />
+
+          <label>Mã bảo mật (CVV):</label>
+          <input type="text" maxlength="4" placeholder="3-4 số" required />
+        </div>
+
+        <button type="submit">Hoàn tất Thanh Toán</button>
+      </form>
+    </div>
+
+    <script>
+      const methodSelect = document.getElementById("method");
+      const cardDetails = document.getElementById("cardDetails");
+
+      methodSelect.addEventListener("change", () => {
+        cardDetails.style.display =
+          methodSelect.value === "credit" || methodSelect.value === "visa"
+            ? "block"
+            : "none";
+      });
+
+      function confirmPayment(event) {
+        event.preventDefault();
+
+        Swal.fire({
+          title: "🎉 Thanh Toán Thành Công!",
+          text: "Cảm ơn bạn đã đặt phòng tại khách sạn.",
+          icon: "success",
+          confirmButtonText: "Đóng",
+          confirmButtonColor: "#10b981",
+        });
+
+        // Optional: Clear form
+        event.target.reset();
+        cardDetails.style.display = "none";
+
+        // chuyen ve trang home
+        setTimeout(() =>  location.href = "../index.html", 2000);
+      }
+    </script>
+  </body>
+</html>

@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <style>
       .comment-form {
         display: none;
@@ -12,12 +18,12 @@
         border: 1px solid #ccc;
         border-radius: 5px;
       }
-    
+
       .comment-form textarea {
         width: 100%;
         resize: vertical;
       }
-    
+
       .comment-form button {
         margin-top: 5px;
         padding: 5px 10px;
@@ -28,7 +34,7 @@
     <title>Triplify</title>
     <!-- Liên kết đến tệp CSS -->
     <link rel="stylesheet" href="./css/style.css" />
-    
+
     <!-- Liên kết đến thư viện Owl Carousel để tạo slider -->
     <link
       rel="stylesheet"
@@ -44,7 +50,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    
+
     <!-- Nhúng thư viện jQuery -->
     <script
       src="https://code.jquery.com/jquery-1.12.4.min.js"
@@ -52,44 +58,47 @@
       crossorigin="anonymous"
     ></script>
   </head>
-<!-- Go to Top Button -->
-<button onclick="scrollToTop()" id="goTopBtn" title="Go to top">↑</button>
-<script>
-  // Show/hide button when scrolling
-  window.onscroll = function () {
-    const btn = document.getElementById("goTopBtn");
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-      btn.style.display = "block";
-    } else {
-      btn.style.display = "none";
-    }
-  };
+  <!-- Go to Top Button -->
+  <button onclick="scrollToTop()" id="goTopBtn" title="Go to top">↑</button>
+  <script>
+    // Show/hide button when scrolling
+    window.onscroll = function () {
+      const btn = document.getElementById("goTopBtn");
+      if (
+        document.body.scrollTop > 200 ||
+        document.documentElement.scrollTop > 200
+      ) {
+        btn.style.display = "block";
+      } else {
+        btn.style.display = "none";
+      }
+    };
 
-  // Scroll to top smoothly
-  function scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  }
-</script>
-<script>
-  function toggleCommentForm(icon) {
-    const form = icon.nextElementSibling;
-    form.style.display = (form.style.display === 'block') ? 'none' : 'block';
-  }
-
-  function submitComment(button) {
-    const textarea = button.previousElementSibling;
-    const comment = textarea.value.trim();
-    if (comment !== "") {
-      alert("Comment submitted: " + comment);
-      textarea.value = "";
-    } else {
-      alert("Please write a comment before submitting.");
+    // Scroll to top smoothly
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     }
-  }
-</script>
+  </script>
+  <script>
+    function toggleCommentForm(icon) {
+      const form = icon.nextElementSibling;
+      form.style.display = form.style.display === "block" ? "none" : "block";
+    }
+
+    function submitComment(button) {
+      const textarea = button.previousElementSibling;
+      const comment = textarea.value.trim();
+      if (comment !== "") {
+        alert("Comment submitted: " + comment);
+        textarea.value = "";
+      } else {
+        alert("Please write a comment before submitting.");
+      }
+    }
+  </script>
   <body>
     <header>
       <div class="content flex_space">
@@ -97,7 +106,7 @@
         <div class="logo">
           <img style="height: 6vh" src="images/logo.png" alt="" />
         </div>
-        
+
         <!-- Thanh điều hướng -->
         <div class="navlinks">
           <ul id="menulist">
@@ -107,49 +116,53 @@
             <li><a href="#pages">pages</a></li>
             <li><a href="#news">news</a></li>
             <li><a href="#contact">contact</a></li>
-            <li><a href="./html/login.html">admin</a></li>
-            <li><i class="fa fa-search"></i></li>
-            <li class="account-dropdown">
+            <li><a href="./html/login.html" id="login-btn">Login</a></li>
+            <li class="account-dropdown" id="account-dropdown">
               <a href="#" class="account-btn">
-                  <i class="fa fa-user"></i> My Account ▼
+                <i class="fa fa-user"></i> My Account ▼
               </a>
               <div class="dropdown-content">
-                  <div class="account-info">
-                      <strong>John Doe</strong>
-                      <small>john@example.com</small>
-                  </div>
-                  <a href="#" id="changePasswordBtn"><i class="fa fa-key"></i> Change Password</a>
-                  <div class="dropdown-footer">
-                      <a href="#" id="logoutBtn" style="color: #d32f2f;"><i class="fa fa-sign-out"></i> Logout</a>
-                  </div>
+                <div class="account-info">
+                  <strong>John Doe</strong>
+                  <small id="email">john@example.com</small>
+                </div>
+                <a href="#" id="changePasswordBtn" style="font-size: 15px"
+                  ><i class="fa fa-key"></i> Change Password</a
+                >
+                <a
+                  href="./index.html"
+                  id="logoutBtn"
+                  style="color: #d32f2f; font-size: 15px"
+                  ><i class="fa fa-sign-out"></i> Logout</a
+                >
               </div>
-          </li>
-          
-          <!-- Add this modal for password change -->
-          <div id="passwordModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-modal">&times;</span>
-                  <h2>Change Password</h2>
-                  <form id="passwordForm">
-                      <div class="form-group">
-                          <label for="currentPassword">Current Password</label>
-                          <input type="password" id="currentPassword" required>
-                      </div>
-                      <div class="form-group">
-                          <label for="newPassword">New Password</label>
-                          <input type="password" id="newPassword" required>
-                      </div>
-                      <div class="form-group">
-                          <label for="confirmPassword">Confirm Password</label>
-                          <input type="password" id="confirmPassword" required>
-                      </div>
-                      <button type="submit" class="btn-primary">Change Password</button>
-                      <!-- Add these elements where you want the buttons to appear (likely below "CHANGE PASSWORD" text) -->
-   
+            </li>
 
-                  </form>
+            <!-- Add this modal for password change -->
+            <div id="passwordModal" class="modal">
+              <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>Change Password</h2>
+                <form id="passwordForm">
+                  <div class="form-group">
+                    <label for="currentPassword">Current Password</label>
+                    <input type="password" id="currentPassword" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" required />
+                  </div>
+                  <button type="submit" class="btn-primary">
+                    Change Password
+                  </button>
+                  <!-- Add these elements where you want the buttons to appear (likely below "CHANGE PASSWORD" text) -->
+                </form>
               </div>
-          </div>
+            </div>
             <li><button class="primary-btn">BOOK NOW</button></li>
           </ul>
           <!-- Biểu tượng menu di động -->
@@ -187,22 +200,20 @@
               </div>
             </div>
           </div>
-          
+
           <!-- Slide 2 -->
           <div class="item">
             <img src="images/banner-2.png" alt="" />
             <div class="text">
               <h1>Spend Your Holiday</h1>
-              <p>
-                
-              </p>
+              <p></p>
               <div class="flex">
                 <button class="primary-btn">READ MORE</button>
                 <button class="secondary-btn">CONTACT US</button>
               </div>
             </div>
           </div>
-          
+
           <!-- Slide 3 -->
           <div class="item">
             <img src="images/banner-3.png" alt="" />
@@ -339,14 +350,13 @@
         <div class="heading">
           <h1>EXPOLRE</h1>
           <h2>Our Rooms</h2>
-
         </div>
 
         <div class="content mtop">
           <div class="owl-carousel owl-carousel1 owl-theme">
             <div class="items">
               <div class="image">
-                <img src="images/room-1.png" alt="" />
+                <img src="./images/room-1.png" alt="" />
               </div>
               <div class="text">
                 <h2>Suporior Rooms</h2>
@@ -363,7 +373,12 @@
                   ngoạn mục cho một kỳ nghỉ thực sự đáng nhớ
                 </p>
                 <div class="button flex">
-                  <button class="primary-btn" onclick="window.location.href='booking.html?room=Superior'">BOOK NOW</button>
+                  <button
+                    class="primary-btn"
+                    onclick="window.location.href='./html/booking.html?room=Superior'"
+                  >
+                    BOOK NOW
+                  </button>
                   <h3>
                     $249
                     <span>
@@ -376,7 +391,7 @@
             </div>
             <div class="items">
               <div class="image">
-                <img src="images/room-2.png" alt="" />
+                <img src="./images/room-2.png" alt="" />
               </div>
               <div class="text">
                 <h2>Large Room</h2>
@@ -394,7 +409,12 @@
                   đi của họ."
                 </p>
                 <div class="button flex">
-                  <button class="primary-btn" onclick="window.location.href='booking.html?room=Large'">BOOK NOW</button>
+                  <button
+                    class="primary-btn"
+                    onclick="window.location.href='./html/booking.html?room=Large'"
+                  >
+                    BOOK NOW
+                  </button>
                   <h3>
                     $199
                     <span>
@@ -407,7 +427,7 @@
             </div>
             <div class="items">
               <div class="image">
-                <img src="images/room-3.png" alt="" />
+                <img src="./images/room-3.png" alt="" />
               </div>
               <div class="text">
                 <h2>Medium Room</h2>
@@ -424,7 +444,12 @@
                   không gian yên bình cho một kỳ nghỉ thư giãn."
                 </p>
                 <div class="button flex">
-                  <button class="primary-btn" onclick="window.location.href='booking.html?room=Medium'">BOOK NOW</button>
+                  <button
+                    class="primary-btn"
+                    onclick="window.location.href='./html/booking.html?room=Medium'"
+                  >
+                    BOOK NOW
+                  </button>
                   <h3>
                     $159
                     <span>
@@ -437,7 +462,7 @@
             </div>
             <div class="items">
               <div class="image">
-                <img src="images/room-4.png" alt="" />
+                <img src="./images/room-4.png" alt="" />
               </div>
               <div class="text">
                 <h2>Giường Đơn</h2>
@@ -449,7 +474,8 @@
                   <i class="fa fa-star"></i>
                 </div>
                 <p>
-                  Phòng Đôi của chúng tôi là sự lựa chọn hoàn hảo cho một căn phòng rộng rải
+                  Phòng Đôi của chúng tôi là sự lựa chọn hoàn hảo cho một căn
+                  phòng rộng rải
                 </p>
                 <div class="button flex">
                   <button class="primary-btn">BOOK NOW</button>
@@ -465,7 +491,7 @@
             </div>
             <div class="items">
               <div class="image">
-                <img src="images/room-5.png" alt="" />
+                <img src="./images/room-5.png" alt="" />
               </div>
               <div class="text">
                 <h2>Giường Đơn</h2>
@@ -477,7 +503,8 @@
                   <i class="fa fa-star"></i>
                 </div>
                 <p>
-                  Phòng Đơn của chúng tôi là sự lựa chọn hoàn hảo cho căn phòng rộng rải
+                  Phòng Đơn của chúng tôi là sự lựa chọn hoàn hảo cho căn phòng
+                  rộng rải
                 </p>
                 <div class="button flex">
                   <button class="primary-btn">BOOK NOW</button>
@@ -493,7 +520,7 @@
             </div>
             <div class="items">
               <div class="image">
-                <img src="images/room-6.png" alt="" />
+                <img src="./images/room-6.png" alt="" />
               </div>
               <div class="text">
                 <h2>All-in-one room</h2>
@@ -504,8 +531,7 @@
                   <i class="fa fa-star"></i>
                   <i class="fa fa-star"></i>
                 </div>
-                
-                
+
                 <div class="button flex">
                   <button class="primary-btn">BOOK NOW</button>
                   <h3>
@@ -519,7 +545,7 @@
             </div>
             <div class="items">
               <div class="image">
-                <img src="images/room-7.png" alt="" />
+                <img src="./images/room-7.png" alt="" />
               </div>
               <div class="text">
                 <h2>Phòng Lớn + giường đôi</h2>
@@ -548,7 +574,7 @@
             </div>
             <div class="items">
               <div class="image">
-                <img src="images/room-8.png" alt="" />
+                <img src="./images/room-8.png" alt="" />
               </div>
               <div class="text">
                 <h2>Suporior Rooms</h2>
@@ -603,103 +629,101 @@
         },
       });
     </script>
-     
 
-      <div class="content mtop">
-        <div class="owl-carousel owl-carousel1 owl-theme">
-          <div class="items">
-            <div class="img">
-              <img src="images/gallery-1.png" alt="" />
-            </div>
-            <div class="overlay">
-              <span class="fa fa-plus"> </span>
-              <h3>Room 1</h3>
-            </div>
+    <div class="content mtop">
+      <div class="owl-carousel owl-carousel1 owl-theme">
+        <div class="items">
+          <div class="img">
+            <img src="./images/gallery-1.png" alt="" />
           </div>
-          <div class="items">
-            <div class="img">
-              <img src="images/gallery-2.png" alt="" />
-            </div>
-            <div class="overlay">
-              <span class="fa fa-plus"> </span>
-              <h3>Room 2</h3>
-            </div>
+          <div class="overlay">
+            <span class="fa fa-plus"> </span>
+            <h3>Room 1</h3>
           </div>
-          <div class="items">
-            <div class="img">
-              <img src="images/gallery-3.png" alt="" />
-            </div>
-            <div class="overlay">
-              <span class="fa fa-plus"> </span>
-              <h3>Room 3</h3>
-            </div>
+        </div>
+        <div class="items">
+          <div class="img">
+            <img src="./images/gallery-2.png" alt="" />
           </div>
-          <div class="items">
-            <div class="img">
-              <img src="images/gallery-4.png" alt="" />
-            </div>
-            <div class="overlay">
-              <span class="fa fa-plus"> </span>
-              <h3>Room 4</h3>
-            </div>
+          <div class="overlay">
+            <span class="fa fa-plus"> </span>
+            <h3>Room 2</h3>
           </div>
-          <div class="items">
-            <div class="img">
-              <img src="images/gallery-5.png" alt="" />
-            </div>
-            <div class="overlay">
-              <span class="fa fa-plus"> </span>
-              <h3>Room 5</h3>
-            </div>
+        </div>
+        <div class="items">
+          <div class="img">
+            <img src="./images/gallery-3.png" alt="" />
           </div>
-          <div class="items">
-            <div class="img">
-              <img src="images/gallery-6.png" alt="" />
-            </div>
-            <div class="overlay">
-              <span class="fa fa-plus"> </span>
-              <h3>Room 6</h3>
-            </div>
+          <div class="overlay">
+            <span class="fa fa-plus"> </span>
+            <h3>Room 3</h3>
           </div>
-          <div class="items">
-            <div class="img">
-              <img src="images/gallery-4.png" alt="" />
-            </div>
-            <div class="overlay">
-              <span class="fa fa-plus"> </span>
-              <h3>Room 7</h3>
-            </div>
+        </div>
+        <div class="items">
+          <div class="img">
+            <img src="./images/gallery-4.png" alt="" />
           </div>
-          <div class="items">
-            <div class="img">
-              <img src="images/gallery-3.png" alt="" />
-            </div>
-            <div class="overlay">
-              <span class="fa fa-plus"> </span>
-              <h3>Room 8</h3>
-            </div>
+          <div class="overlay">
+            <span class="fa fa-plus"> </span>
+            <h3>Room 4</h3>
           </div>
-          <div class="items">
-            <div class="img">
-              <img src="images/gallery-1.png" alt="" />
-            </div>
-            <div class="overlay">
-              <span class="fa fa-plus"> </span>
-              <h3>Room 9</h3>
-            </div>
+        </div>
+        <div class="items">
+          <div class="img">
+            <img src="./images/gallery-5.png" alt="" />
           </div>
-          <div class="items">
-            <div class="img">
-              <img src="images/gallery-6.png" alt="" />
-            </div>
-            <div class="overlay">
-              <span class="fa fa-plus"> </span>
-              <h3>Room 10</h3>
-            </div>
+          <div class="overlay">
+            <span class="fa fa-plus"> </span>
+            <h3>Room 5</h3>
+          </div>
+        </div>
+        <div class="items">
+          <div class="img">
+            <img src="./images/gallery-6.png" alt="" />
+          </div>
+          <div class="overlay">
+            <span class="fa fa-plus"> </span>
+            <h3>Room 6</h3>
+          </div>
+        </div>
+        <div class="items">
+          <div class="img">
+            <img src="./images/gallery-4.png" alt="" />
+          </div>
+          <div class="overlay">
+            <span class="fa fa-plus"> </span>
+            <h3>Room 7</h3>
+          </div>
+        </div>
+        <div class="items">
+          <div class="img">
+            <img src="./images/gallery-3.png" alt="" />
+          </div>
+          <div class="overlay">
+            <span class="fa fa-plus"> </span>
+            <h3>Room 8</h3>
+          </div>
+        </div>
+        <div class="items">
+          <div class="img">
+            <img src="./images/gallery-1.png" alt="" />
+          </div>
+          <div class="overlay">
+            <span class="fa fa-plus"> </span>
+            <h3>Room 9</h3>
+          </div>
+        </div>
+        <div class="items">
+          <div class="img">
+            <img src="./images/gallery-6.png" alt="" />
+          </div>
+          <div class="overlay">
+            <span class="fa fa-plus"> </span>
+            <h3>Room 10</h3>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
     <script>
       $(".owl-carousel1").owlCarousel({
@@ -764,7 +788,7 @@
             </div>
           </div>
           <div class="right">
-            <img src="images/service.png" alt="" />
+            <img src="./images/service.png" alt="" />
           </div>
         </div>
       </div>
@@ -796,7 +820,6 @@
               nulla pariatur. Excepteur sint occaecat cupidatat non proident,
               sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>
-          
           </div>
           <div class="item">
             <i class="fa-solid fa-quote-right"></i>
@@ -840,59 +863,80 @@
         <div class="heading">
           <h1>NEWS</h1>
           <h2>Our News</h2>
-
         </div>
 
         <div class="content flex">
           <div class="left grid2">
             <div class="items">
               <div class="image">
-                <img src="images/blog-1.png" alt="" />
+                <img src="./images/blog-1.png" alt="" />
               </div>
               <div class="text">
                 <h2>A new decorated bar</h2>
                 <div class="admin flex">
                   <i class="fa fa-user"></i>
                   <label>Admin</label>
-                  <i class="fa fa-heart" id="heart-icon" onclick="toggleLike()"></i>
+                  <i
+                    class="fa fa-heart"
+                    id="heart-icon"
+                    onclick="toggleLike()"
+                  ></i>
                   <label id="heart-count">421</label>
-                  <i class="fa fa-comments" onclick="toggleCommentForm(this)"></i>
+                  <i
+                    class="fa fa-comments"
+                    onclick="toggleCommentForm(this)"
+                  ></i>
 
-<!-- 👇 Comment form -->
-<div class="comment-form">
-  <textarea placeholder="Write your comment..." rows="3"></textarea>
-  <br>
-  <button onclick="submitComment(this)">Submit</button>
-</div>
+                  <!-- 👇 Comment form -->
+                  <div class="comment-form">
+                    <textarea
+                      placeholder="Write your comment..."
+                      rows="3"
+                    ></textarea>
+                    <br />
+                    <button onclick="submitComment(this)">Submit</button>
+                  </div>
                 </div>
                 <p>
-                  The new bar is now open. Come and enjoy the best drink in the beach
+                  The new bar is now open. Come and enjoy the best drink in the
+                  beach
                 </p>
               </div>
             </div>
             <div class="items">
               <div class="image">
-                <img src="images/blog-2.png" alt="" />
+                <img src="./images/blog-2.png" alt="" />
               </div>
               <div class="text">
                 <h2>Our new Suporior Rooms</h2>
                 <div class="admin flex">
                   <i class="fa fa-user"></i>
                   <label>Admin</label>
-                  <i class="fa fa-heart" id="heart-icon-2" onclick="toggleLike2()"></i>
+                  <i
+                    class="fa fa-heart"
+                    id="heart-icon-2"
+                    onclick="toggleLike2()"
+                  ></i>
                   <label id="heart-count-2">116</label>
 
-                  <i class="fa fa-comments" onclick="toggleCommentForm(this)"></i>
+                  <i
+                    class="fa fa-comments"
+                    onclick="toggleCommentForm(this)"
+                  ></i>
 
-<!-- 👇 Comment form -->
-<div class="comment-form">
-  <textarea placeholder="Write your comment..." rows="3"></textarea>
-  <br>
-  <button onclick="submitComment(this)">Submit</button>
-</div>
+                  <!-- 👇 Comment form -->
+                  <div class="comment-form">
+                    <textarea
+                      placeholder="Write your comment..."
+                      rows="3"
+                    ></textarea>
+                    <br />
+                    <button onclick="submitComment(this)">Submit</button>
+                  </div>
                 </div>
                 <p>
-                  We have added new suporior rooms with the best view in the city
+                  We have added new suporior rooms with the best view in the
+                  city
                 </p>
               </div>
             </div>
@@ -901,34 +945,40 @@
           <div class="right">
             <div class="box flex">
               <div class="img">
-                <img src="images/blog-s1.png" alt="" />
+                <img src="./images/blog-s1.png" alt="" />
               </div>
               <div class="stext">
                 <h2>Seaside Sanctuary Villa</h2>
                 <p>
-                  Indulge in unparalleled luxury at our exclusive villa. Private pool, stunning ocean views, and personalized service await. Your dream escape begins here.
+                  Indulge in unparalleled luxury at our exclusive villa. Private
+                  pool, stunning ocean views, and personalized service await.
+                  Your dream escape begins here.
                 </p>
               </div>
             </div>
             <div class="box flex">
               <div class="img">
-                <img src="images/blog-s2.png" alt="" />
+                <img src="./images/blog-s2.png" alt="" />
               </div>
               <div class="stext">
                 <h2>Family Fun Beachfront Retreat</h2>
                 <p>
-                  Create unforgettable memories with your loved ones at our family-friendly resort. Enjoy direct beach access, exciting activities, and spacious accommodations for everyone.
+                  Create unforgettable memories with your loved ones at our
+                  family-friendly resort. Enjoy direct beach access, exciting
+                  activities, and spacious accommodations for everyone.
                 </p>
               </div>
             </div>
             <div class="box flex">
               <div class="img">
-                <img src="images/blog-s3.png" alt="" />
+                <img src="./images/blog-s3.png" alt="" />
               </div>
               <div class="stext">
                 <h2>Heartwarming Homestay Experience</h2>
                 <p>
-                  Experience the warmth of local hospitality at our charming homestay. Start your day with a delicious homemade breakfast and connect with the culture in a truly authentic way.
+                  Experience the warmth of local hospitality at our charming
+                  homestay. Start your day with a delicious homemade breakfast
+                  and connect with the culture in a truly authentic way.
                 </p>
               </div>
             </div>
@@ -936,20 +986,52 @@
         </div>
       </div>
     </section>
-    <section id="location" style="padding: 60px 20px; background-color: #f8f8f8;">
-      <h2 style="text-align: center; font-size: 60px; font-family: 'Georgia', serif; color: #2c3e50;">
+    <section
+      id="location"
+      style="padding: 60px 20px; background-color: #f8f8f8"
+    >
+      <h2
+        style="
+          text-align: center;
+          font-size: 60px;
+          font-family: 'Georgia', serif;
+          color: #2c3e50;
+        "
+      >
         Visit Our Tranquil Paradise
       </h2>
-      <p style="text-align: center; font-size: 18px; color: #555; max-width: 700px; margin: 10px auto 30px;">
-        Nestled on the peaceful coastline of Da Nang, <strong>Crowny Hotel</strong> offers elegant beachfront living.
-        Discover tropical luxury and personalized service, just moments from the city.
+      <p
+        style="
+          text-align: center;
+          font-size: 18px;
+          color: #555;
+          max-width: 700px;
+          margin: 10px auto 30px;
+        "
+      >
+        Nestled on the peaceful coastline of Da Nang,
+        <strong>Crowny Hotel</strong> offers elegant beachfront living. Discover
+        tropical luxury and personalized service, just moments from the city.
       </p>
-    
-      <div style="max-width: 900px; margin: 0 auto; border: 1px solid #ccc; border-radius: 10px; overflow: hidden;">
+
+      <div
+        style="
+          max-width: 900px;
+          margin: 0 auto;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+          overflow: hidden;
+        "
+      >
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15335.496633017865!2d108.2673!3d16.0533!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420fa1aa7d945f%3A0x8a16a193d0f9b143!2sThe%20Ocean%20Villas%20Da%20Nang!5e0!3m2!1sen!2s!4v1717187654321!5m2!1sen!2s"
-          width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
+          width="100%"
+          height="400"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        >
         </iframe>
       </div>
     </section>
@@ -966,9 +1048,14 @@
         <div class="box">
           <img src="images/logo-2.png" alt="" />
           <p>
-            Connect with Crowny on social media for exclusive updates, behind-the-scenes content, and special offers. Join our community today!
-            Become part of the Crowny family! Follow us on Facebook, Instagram, and Twitter to share your experiences, discover new trends, and stay connected with our vibrant community.
-            Stay in the loop with Crowny! Get the latest news, style tips, and exclusive promotions delivered directly to your social feeds. Follow us to unlock a world of benefits
+            Connect with Crowny on social media for exclusive updates,
+            behind-the-scenes content, and special offers. Join our community
+            today! Become part of the Crowny family! Follow us on Facebook,
+            Instagram, and Twitter to share your experiences, discover new
+            trends, and stay connected with our vibrant community. Stay in the
+            loop with Crowny! Get the latest news, style tips, and exclusive
+            promotions delivered directly to your social feeds. Follow us to
+            unlock a world of benefits
           </p>
 
           <div class="icon">
@@ -992,9 +1079,7 @@
 
         <div class="box">
           <h2>Contact Us</h2>
-          <p>
-            Fb:Jingle H bel
-          </p>
+          <p>Fb:Jingle H bel</p>
           <i class="fa fa-location-dot"></i>
           <label>338/58 Lê Thị Riêng, Quận 12, TP.HCM </label> <br />
           <i class="fa fa-phone"></i>
@@ -1005,24 +1090,19 @@
       </div>
     </footer>
 
-    <div class="legal">
-
-    </div>
-
     <script
       src="https://kit.fontawesome.com/032d11eac3.js"
       crossorigin="anonymous"
     ></script>
-    <script src="./js/manage_account.js"></script>
     <script>
       let liked = false;
       let count = 421;
-    
+
       function toggleLike() {
         liked = !liked;
         const icon = document.getElementById("heart-icon");
         const label = document.getElementById("heart-count");
-    
+
         if (liked) {
           icon.style.color = "red";
           count++;
@@ -1030,19 +1110,19 @@
           icon.style.color = "green"; // or your original color
           count--;
         }
-    
+
         label.textContent = count;
       }
     </script>
     <script>
       let liked2 = false;
       let count2 = 116;
-    
+
       function toggleLike2() {
         liked2 = !liked2;
         const icon = document.getElementById("heart-icon-2");
         const label = document.getElementById("heart-count-2");
-    
+
         if (liked2) {
           icon.style.color = "red";
           count2++;
@@ -1050,10 +1130,11 @@
           icon.style.color = "green";
           count2--;
         }
-    
+
         label.textContent = count2;
       }
     </script>
-    
+
+    <script src="./js/nav.js"></script>
   </body>
 </html>
